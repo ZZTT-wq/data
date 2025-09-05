@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import pandas as pd
+import os
 
 app = Flask(__name__)
 
@@ -43,5 +44,4 @@ def generate_radar():
     return jsonify(radar_data)
 
 if __name__ == '__main__':
-    # 本地调试用，Render 部署时会用 gunicorn 启动
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
